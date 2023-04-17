@@ -1,0 +1,31 @@
+version: "3.6"
+services:
+  oracle:
+#    image: gvenzl/oracle-xe:18
+    image: gvenzl/oracle-xe:21-slim
+    # Local name of generated conainer
+    container_name: local.zvanoz.samples.oracle
+#    user: "${UID}:${GID}"
+    env_file:
+      - ./.env
+#    environment:
+#      APP_USER: "MYUSERNAME"
+#      APP_USER_PASSWORD: "myUserPass"
+#      # For SYS user with role SYSDBA
+#      ORACLE_PASSWORD : "sysPass"
+#      ORACLE_DATABASE : "zimdbt"
+    ports:
+      - ${MAP_PORT}:1521
+    volumes:
+      - ./tmp/oradata:/opt/oracle/oradata
+      - ./oracle/container-entrypoint-initdb.d:/container-entrypoint-initdb.d
+      - ./oracle/container-entrypoint-startdb.d:/container-entrypoint-startdb.d
+      - ./oracle/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+#      - ./oracle/container-entrypoint.sh:/opt/oracle/container-entrypoint.sh
+
+    # Provide healthcheck script options for startup
+#    options: >-
+#      --health-cmd healthcheck.sh
+#      --health-interval 10s
+#      --health-timeout 5s
+#      --health-retries 10
