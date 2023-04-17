@@ -5,7 +5,6 @@ services:
     image: gvenzl/oracle-xe:21-slim
     # Local name of generated conainer
     container_name: local.zvanoz.samples.oracle
-#    user: "${UID}:${GID}"
     env_file:
       - ./.env
 #    environment:
@@ -29,3 +28,18 @@ services:
 #      --health-interval 10s
 #      --health-timeout 5s
 #      --health-retries 10
+  php-apache :
+    image: local/oracle-xe-samples-php-apache
+    container_name: local.oracle-xe-samples-php-apache
+    user: "${UID}:${GID}"
+    build :
+      context: ./php/docker/oracle-xe-samples-php-apache
+      dockerfile: Dockerfile
+    env_file:
+      - ./.env
+    ports:
+      - "8080:80"
+    volumes:
+      - ./php/www:/var/www
+      - ./php/docker/oracle-xe-samples-php-apache/volume/bin:/app/bin
+      - ./php/docker/oracle-xe-samples-php-apache/volume/configs/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+        bootstrap="vendor/autoload.php"
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        convertDeprecationsToExceptions="false"
+>
+
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+    </coverage>
+
+    <testsuites>
+        <testsuite name="integration test">
+            <directory>tests/OracleXeTest</directory>
+        </testsuite>
+    </testsuites>
+
+    <listeners>
+        <listener
+                class="OracleXeTest\IntegrationTestListener"
+                file="tests/OracleXeTest/IntegrationTestListener.php"
+        />
+    </listeners>
+
+
+    <php>
+        <ini name="date.timezone" value="UTC"/>
+        <ini name="error_reporting" value="E_ALL"/>
+
+        <env name="TESTS_DB_ORACLE_IS_ENABLED" value="true"/>
+        <env name="TESTS_DB_ORACLE_HOSTNAME" value="172.28.0.1"/>
+        <env name="TESTS_DB_ORACLE_PORT" value="1521"/>
+        <env name="TESTS_DB_ORACLE_USERNAME" value="MYUSERNAME"/>
+        <env name="TESTS_DB_ORACLE_PASSWORD" value="myUserPass"/>
+        <env name="TESTS_DB_ORACLE_SERVICE" value="zimdbt"/>
+        <env name="TESTS_DB_ORACLE_CHARSET" value="UTF8"/>
+    </php>
+</phpunit>

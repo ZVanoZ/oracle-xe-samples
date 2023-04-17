@@ -1,0 +1,49 @@
+{
+  "name": "zvanoz/oracle-xe-samples",
+  "type": "application",
+  "version": "0.0.1",
+  "description": "Примеры работы с Oracle из PHP ",
+  "license": "Apache-2.0",
+  "keywords": [
+    "Oracle XE",
+    "PHP"
+  ],
+  "config": {
+    "sort-packages": true,
+    "secure-http": false
+  },
+  "require": {
+    "php": "^8.1",
+    "ext-oci8": "*"
+  },
+  "require-dev": {
+    "ext-pdo": "*",
+    "phpunit/phpunit": "^9.5.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/",
+      "OracleXeTest\\": "tests/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "App\\": "src/",
+      "OracleXeTest\\": "tests/"
+    }
+  },
+  "scripts": {
+    "composer-install": "composer update -v",
+    "composer-install-ignore-platform": "composer install -v --ignore-platform-req=ext-*",
+    "composer-update": "composer update -v",
+    "composer-update-ignore-platform": "composer update -vvv --ignore-platform-req=ext-* --with-dependencies",
+    "composer-fund": "composer fund",
+    "cs-check": "phpcs",
+    "cs-fix": "phpcbf",
+    "test": "phpunit",
+    "test-color": "phpunit --colors=always --testsuite \"unit test\"",
+    "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+    "test-integration": "phpunit --colors=always --testsuite \"integration test\"",
+    "upload-coverage": "coveralls -v"
+  }
+}
